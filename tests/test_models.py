@@ -201,7 +201,7 @@ class TestProductModel(unittest.TestCase):
 
         for product in found_products:
             self.assertEqual(product.category, category)
-    
+
     def test_find_by_price(self):
         """Test finding a product by price"""
         products = ProductFactory.create_batch(5)
@@ -213,10 +213,10 @@ class TestProductModel(unittest.TestCase):
 
         found_product = Product.find_by_price(target_price)
         self.assertEqual(found_product.count(), prod_count)
-        
+
         for product in found_product:
             self.assertEqual(product.price, target_price)
-    
+
     def test_find_by_price_when_str(self):
         """Test finding a product by string price"""
         products = ProductFactory.create_batch(5)
@@ -229,6 +229,6 @@ class TestProductModel(unittest.TestCase):
 
         found_product = Product.find_by_price(target_price)
         self.assertEqual(found_product.count(), prod_count)
-        
+
         for product in found_product:
             self.assertEqual(product.price, target_price)

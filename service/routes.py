@@ -132,12 +132,11 @@ def list_products():
 # R E A D   A   P R O D U C T
 ######################################################################
 
-#
-# PLACE YOUR CODE HERE TO READ A PRODUCT
-#
-@app.route("/products/<int:product_id>", methods = ["GET"])
+
+@app.route("/products/<int:product_id>", methods=["GET"])
 def get_products(product_id):
-    product = Product.find(product_id = product_id)
+    """Read a product by id"""
+    product = Product.find(product_id=product_id)
     if product is None:
         abort(status.HTTP_404_NOT_FOUND, f"Product with ID {product_id} not found")
     return product.serialize(), status.HTTP_200_OK
@@ -146,15 +145,14 @@ def get_products(product_id):
 # U P D A T E   A   P R O D U C T
 ######################################################################
 
-#
-# PLACE YOUR CODE TO UPDATE A PRODUCT HERE
-#
-@app.route("/products/<int:product_id>", methods = ["PUT"])
+
+@app.route("/products/<int:product_id>", methods=["PUT"])
 def update_products(product_id):
-    product = Product.find(product_id = product_id)
+    """Update the attributes of a product with a particular id"""
+    product = Product.find(product_id=product_id)
     if product is None:
         abort(status.HTTP_404_NOT_FOUND, f"Product with ID {product_id} not found")
-    
+
     product.deserialize(request.get_json())
     product.id = product_id
     product.update()
@@ -165,12 +163,10 @@ def update_products(product_id):
 ######################################################################
 
 
-#
-# PLACE YOUR CODE TO DELETE A PRODUCT HERE
-#
-@app.route("/products/<int:product_id>", methods = ["DELETE"])
+@app.route("/products/<int:product_id>", methods=["DELETE"])
 def delete_products(product_id):
-    product = Product.find(product_id = product_id)
+    """Delete the product with a particular id"""
+    product = Product.find(product_id=product_id)
     if product is not None:
         product.delete()
     return "", status.HTTP_204_NO_CONTENT
